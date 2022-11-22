@@ -8,10 +8,10 @@ private:
 
 public:
     Point(int u = 0, int v = 0) : x(u), y(v) {}
-    int Point::getX() const;
-    int Point::getY() const;
-    void Point::setX(const int new_x);
-    void Point::setY(const int new_y);
+    int getX() const;
+    int getY() const;
+    void setX(const int new_x);
+    void setY(const int new_y);
 };
 
 class PointArray
@@ -53,6 +53,26 @@ public:
     Polygon(const Point points[], const int length);
     Polygon(const PointArray &points);
     ~Polygon();
+
+    virtual double area() const = 0;
+    static int getNumPolygons();
+    int getNumSides();
+    const PointArray *getPoints();
+};
+
+class Rectangle : public Polygon
+{
+public:
+    Rectangle(const Point &lowerLeft, const Point &upperRight);
+    Rectangle(const int a, const int b, const int c, const int d);
+    virtual double area() const;
+};
+
+class Triangle : public Polygon
+{
+public:
+    Triangle(const Point &a, const Point &b, const Point &c);
+    virtual double area() const;
 };
 
 #endif
